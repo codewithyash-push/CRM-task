@@ -16,9 +16,9 @@ git push -u origin main
 ## Render Deployment
 
 1. Open [Render](https://render.com).
-2. Create a new **Web Service**.
+2. Create a new **Web Service** or choose **Blueprint** if Render detects `render.yaml`.
 3. Connect the GitHub repository `codewithyash-push/CRM-task`.
-4. Use these settings:
+4. If creating manually, use these settings:
    - Environment: `Node`
    - Build command: `npm install`
    - Start command: `npm start`
