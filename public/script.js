@@ -23,13 +23,7 @@ async function compile() {
   setBusy(compileBtn, true, "Compiling...");
   notesEl.textContent = "";
   try {
-    const response = await fetch("/api/compile", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ prompt: promptEl.value, forceRepair: forceRepairEl.checked })
-    });
-    latest = await response.json();
-    if (!response.ok) throw new Error(latest.error || "Compile failed");
+    latest = await compileWithApiOrStatic();
     renderSummary(latest);
     renderOutput();
   } catch (error) {
@@ -42,8 +36,7 @@ async function compile() {
 async function runEval() {
   setBusy(evalBtn, true, "Running...");
   try {
-    const response = await fetch("/api/evaluation");
-    const data = await response.json();
+    const data = await evalWithApiOrStatic();
     renderMetrics(data);
     outputEl.textContent = JSON.stringify(data, null, 2);
     activeTab = "pipeline";
@@ -90,4 +83,31 @@ function renderMetrics(data) {
 function setBusy(button, busy, label) {
   button.disabled = busy;
   button.textContent = label;
+}
+
+async function compileWithApiOrStatic() {
+  try {
+    const response = await fetch("/api/compile", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt: promptEl.value, forceRepair: forceRepairEl.checked })
+    });
+    const payload = await response.json();
+    if (!response.ok) throw new Error(payload.error || "Compile failed");
+    return payload;
+  } catch (error) {
+    if (!window.AppCompiler) throw error;
+    return window.AppCompiler.compilePrompt(promptEl.value, { forceRepair: forceRepairEl.checked });
+  }
+}
+
+async function evalWithApiOrStatic() {
+  try {
+    const response = await fetch("/api/evaluation");
+    if (!response.ok) throw new Error("Evaluation API unavailable");
+    return await response.json();
+  } catch (error) {
+    if (!window.AppCompiler) throw error;
+    return window.AppCompiler.runEvaluation();
+  }
 }

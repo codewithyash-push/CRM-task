@@ -13,7 +13,23 @@ git commit -m "Build app compiler platform"
 git push -u origin main
 ```
 
+## GitHub Pages Deployment
+
+This is the no-card deployment path. The browser bundle in `public/static-compiler.js` runs the compiler without a backend.
+
+1. Open the repository on GitHub.
+2. Go to **Settings > Pages**.
+3. Under **Build and deployment**, select **GitHub Actions**.
+4. Push to `main`, or open **Actions > Deploy GitHub Pages > Run workflow**.
+5. The live URL will be:
+
+```text
+https://codewithyash-push.github.io/CRM-task/
+```
+
 ## Render Deployment
+
+Render may ask for a card. Use GitHub Pages above if you need a no-card demo URL.
 
 1. Open [Render](https://render.com).
 2. Create a new **Web Service** or choose **Blueprint** if Render detects `render.yaml`.
