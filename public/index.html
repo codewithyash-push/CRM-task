@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>App Compiler Platform</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="workbench">
+        <div class="prompt-pane">
+          <div class="brand">App Compiler Platform</div>
+          <h1>Natural language to validated executable app config</h1>
+          <textarea id="prompt" spellcheck="true">Build a CRM with login, contacts, dashboard, role-based access, and premium plan with payments. Admins can see analytics.</textarea>
+          <div class="actions">
+            <button id="compileBtn" type="button">Compile</button>
+            <button id="evalBtn" type="button" class="secondary">Run Evaluation</button>
+            <label>
+              <input id="forceRepair" type="checkbox">
+              force repair pass
+            </label>
+          </div>
+          <div class="status-grid">
+            <div><span>Valid</span><strong id="validStatus">-</strong></div>
+            <div><span>Runtime</span><strong id="runtimeStatus">-</strong></div>
+            <div><span>Retries</span><strong id="retryStatus">-</strong></div>
+            <div><span>Latency</span><strong id="latencyStatus">-</strong></div>
+          </div>
+          <div id="notes" class="notes"></div>
+        </div>
+        <div class="output-pane">
+          <div class="tabs">
+            <button class="tab active" data-tab="config">Config JSON</button>
+            <button class="tab" data-tab="pipeline">Pipeline</button>
+            <button class="tab" data-tab="runtime">Runtime</button>
+          </div>
+          <pre id="output">{}</pre>
+        </div>
+      </section>
+      <section class="metrics">
+        <h2>Evaluation Metrics</h2>
+        <div id="metricsGrid" class="metrics-grid">
+          <div><span>Success rate</span><strong>-</strong></div>
+          <div><span>Avg retries</span><strong>-</strong></div>
+          <div><span>Avg latency</span><strong>-</strong></div>
+          <div><span>Clarification rate</span><strong>-</strong></div>
+        </div>
+      </section>
+    </main>
+    <script src="/script.js"></script>
+  </body>
+</html>

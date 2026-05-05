@@ -1,0 +1,20 @@
+{
+  "name": "app-compiler-platform",
+  "version": "1.0.0",
+  "description": "Compiler-style natural language to executable app configuration pipeline.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "eval": "node src/evaluation/run-eval.js"
+  },
+  "keywords": [
+    "app-generator",
+    "compiler",
+    "validation",
+    "runtime"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
